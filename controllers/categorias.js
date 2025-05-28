@@ -3,7 +3,7 @@ import Categorias from "../models/categorias.js";
 const getCategorias = async (req, res) => {
   try {
     const categorias = await Categorias.find();
-    res.json({ categorias });
+    res.status(200).json({ categorias });
   } catch (error) {
     res.status(400).json({ msg: "Error al buscar la categoria" });
   }
@@ -23,7 +23,7 @@ const postCategorias = async (req, res) => {
   try {
     const { codigo, nombre } = req.body;
     const categorias = new Categorias({ codigo, nombre });
-    await categorias.save;
+    categorias.save;
     res.json({ categorias });
   } catch (error) {
     res.status(400).json({ msg: "ERoror al guardar la cateforia" });

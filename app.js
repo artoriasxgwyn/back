@@ -14,7 +14,12 @@ app.use("/api/articulos",articulos)
 
 app.listen(process.env.PORT, () => {
   console.log(`Servidor escuchando en el puerto ${process.env.PORT}`);
-  mongoose
+try{
+ mongoose
     .connect("mongodb://127.0.0.1:27017/adso076")
     .then(() => console.log("BD Connected!"));
+}catch(e){
+  console.log(e)
+}
+ 
 });

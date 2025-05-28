@@ -1,5 +1,4 @@
 import Router from "express"
-
 import { deleteCategoriasId, getCategorias, getCategoriasId, postCategorias, putCategoriasId } from "../controllers/categorias.js"
 
 const router = Router()
