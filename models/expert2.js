@@ -2,7 +2,6 @@ import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
-
 const categoriasEsquema = new Schema({
     codigo:{type:String,uniqued:true},
     nombre:{type:String},

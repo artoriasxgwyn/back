@@ -1,9 +1,9 @@
 import Router from "express"
-import { deleteCategoriasId, getCategorias, getCategoriasId, postCategorias, putCategoriasId } from "../controllers/categorias.js"
+import { deleteCategoriasId, getHistorial, getCategoriasId, postCategorias, putCategoriasId } from "../controllers/expert2.js"
 
 const router = Router()
 
-router.get("/", getCategorias )
+router.get("/", getHistorial )
 
 router.get("/:id",getCategoriasId)
 

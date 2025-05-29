@@ -1,6 +1,6 @@
-import Categorias from "../models/categorias.js";
+import Categorias from "../models/expert2.js";
 
-const getCategorias = async (req, res) => {
+const getHistorial = async (req, res) => {
   try {
     const categorias = await Categorias.find();
     res.status(200).json({ categorias });
@@ -23,7 +23,7 @@ const postCategorias = async (req, res) => {
   try {
     const { codigo, nombre } = req.body;
     const categorias = new Categorias({ codigo, nombre });
-    categorias.save;
+    categorias.save();
     res.json({ categorias });
   } catch (error) {
     res.status(400).json({ msg: "ERoror al guardar la cateforia" });
@@ -55,7 +55,7 @@ const deleteCategoriasId = async (req, res) => {
 };
 
 export {
-  getCategorias,
+  getHistorial,
   getCategoriasId,
   postCategorias,
   putCategoriasId,
