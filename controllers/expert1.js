@@ -1,15 +1,23 @@
-import Articulos from "../models/expert1.js";
+import Historial from "../models/historial.js";
 import expert from "../class/clases.js";
- //const articulos = await Articulos.find();
- //console.log(articulos)
+//const articulos = await Articulos.find();
+//console.log(articulos)
+let respuesta="";
+let idauto = 0;
+let expert1 = new expert(`medico`, "has vivido toda tu vida creyendo que el aborto es algo normal y has participado en varios abortos pero ya no piensas igual por que no te parece correcto por tus creencias religiosas",`${Historial.find()}`)
+let vocacion = expert1._vocacion;
 
-let expert1 = new expert(`medico`, "has vivido toda tu vida creyendo que el aborto es algo normal y has participado en varios abortos pero ya no piensas igual por que no te parece correcto por tus creencias religiosas")
-console.log(expert1)
+
+function autoincremental() {
+    return idauto = idauto + 1;
+}
+
+
 const httpArticulos = {
   getArticulos: async (req, res) => {
     try {
-      const articulos = await Articulos.find();
-      res.json({ articulos });
+      const historial = await Historial.find();
+      res.json({ historial });
     } catch (error) {
       res.status(400).json({ msg: "Error al buscar los articulos" });
     }
@@ -17,31 +25,33 @@ const httpArticulos = {
   getArticulosId: async (req, res) => {
     try {
       const { id } = req.params;
-      const articulo = await Articulos.findById(id);
-      res.json({ articulo });
+      const historial = await Historial.findById(id);
+      res.json({ historial });
     } catch (error) {
       res.status(400).json({ msg: "Error al buscar la categoria" });
     }
   },
   postArticulo: async (req, res) => {
-   try {
-       const { codigo, nombre } = req.body;
-       const articulo = new Articulos({ codigo, nombre });
-       await articulo.save();
-       res.json({ articulo });
-     } catch (error) {
-       res.status(400).json({ msg: "Error al guardar la cateforia" });
-     }
+    try {
+      expert1.conversar()
+      respuesta = await expert1.conversar()
+      //const { codigo, nombre } = req.body;
+      const historial = new Historial({ idauto,vocacion, respuesta });
+      await historial.save();
+      res.json({ historial });
+    } catch (error) {
+      res.status(400).json({ msg: "Error al guardar la cateforia" });
+    }
   },
   putArticulo: async (req, res) => {
     try {
       const { id } = req.params;
       const { codigo, nombre } = req.body;
-      const articulos = await Articulos.findByIdAndUpdate(id, {
+      const historial = await Historial.findByIdAndUpdate(id, {
         codigo,
         nombre,
       });
-      res.json({ articulos });
+      res.json({ historial });
     } catch (error) {
       res.status(400).json({ msg: "Error al buscar la articulos" });
     }
@@ -49,8 +59,8 @@ const httpArticulos = {
   deleteArticulo: async (req, res) => {
     try {
       const { id } = req.params;
-      const articulos = await Articulos.findByIdAndDelete(id);
-      res.json({ articulos });
+      const historial = await Historial.findByIdAndDelete(id);
+      res.json({ historial });
     } catch (error) {
       res.status(400).json({ msg: "Error al buscar la articulos" });
     }
@@ -60,8 +70,8 @@ const httpArticulos = {
 const deleteCategoriasId = async (req, res) => {
   try {
     const { id } = req.params;
-    const categorias = await Articulos.findByIdAndDelete(id);
-    res.json({ categorias });
+    const historial = await Historial.findByIdAndDelete(id);
+    res.json({ historial });
   } catch (error) {
     res.status(400).json({ msg: "Error al buscar la categoria" });
   }
