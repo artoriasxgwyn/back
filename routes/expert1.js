@@ -7,10 +7,12 @@ router.get("/", httpArticulos.getArticulos)
 
 router.get("/:id",httpArticulos.getArticulosId)
 
-router.post("/",httpArticulos.postArticulo)
+router.post("/",httpArticulos.postExpert1)
 
 router.put("/:id",httpArticulos.putArticulo)
 
-router.delete("/:id",httpArticulos.deleteArticulo)
+router.delete("/",httpArticulos.deleteHistorial)
+
+router.delete("/:id",httpArticulos.deleteResponse)
 
 export default router

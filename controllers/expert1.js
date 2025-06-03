@@ -1,22 +1,15 @@
 import Historial from "../models/historial.js";
-import expert from "../class/clases.js";
-//const articulos = await Articulos.find();
-//console.log(articulos)
-let respuesta="";
-let idauto = 0;
-let expert1 = new expert(`medico`, "has vivido toda tu vida creyendo que el aborto es algo normal y has participado en varios abortos pero ya no piensas igual por que no te parece correcto por tus creencias religiosas",`${Historial.find()}`)
-let vocacion = expert1._vocacion;
+import Expert from "../class/clases.js";
+import { autoincremental } from "../class/clases.js";
 
-
-function autoincremental() {
-    return idauto = idauto + 1;
-}
-
+let respuesta = "";
 
 const httpArticulos = {
   getArticulos: async (req, res) => {
     try {
+      //find({descripcion: "Thermomix"},{_id:0, precio:1}) 
       const historial = await Historial.find();
+      console.log(historial)
       res.json({ historial });
     } catch (error) {
       res.status(400).json({ msg: "Error al buscar los articulos" });
@@ -25,22 +18,40 @@ const httpArticulos = {
   getArticulosId: async (req, res) => {
     try {
       const { id } = req.params;
-      const historial = await Historial.findById(id);
+      const dataRespuesta = await Historial.find({id: id},{_id:1});
+      const historial = await Historial.findById(dataRespuesta);
       res.json({ historial });
     } catch (error) {
       res.status(400).json({ msg: "Error al buscar la categoria" });
     }
   },
-  postArticulo: async (req, res) => {
+  postExpert1: async (req, res) => {
     try {
-      expert1.conversar()
+      const historial = await Historial.find();
+      const Respuesta = (typeof (historial.at(-1)?.respuesta) === "string")
+        ? historial.at(-1).respuesta
+        : "no hay respuesta";
+      let num = (typeof (historial.at(-1)?.id) === "number")
+        ? historial.at(-1).id
+        : 0;
+      let idauto = await autoincremental(num);
+      let id = idauto;
+      // no se por que hay recordar colocar y quita el historial.find
+      let expert1 = new Expert(`Economista`, `Actúa como un experto en teoría comunista con décadas de 
+      estudio en Marx, Engels,Lenin y teoría económica socialista.Debes analizar cualquier tema 
+      desde una perspectiva de lucha de clases, materialismo histórico y crítica al capitalismo.
+      Defiende valores como la propiedad colectiva de los medios de producción, la planificación 
+      económica centralizada y la eliminación de las clases sociales. solo responde lo que te dicen`,
+        `A esto tienes que responder${Respuesta}`,
+        `Historial de la conversación hasta ahora:${historial}`)
+      let vocacion = expert1._vocacion;
       respuesta = await expert1.conversar()
-      //const { codigo, nombre } = req.body;
-      const historial = new Historial({ idauto,vocacion, respuesta });
-      await historial.save();
-      res.json({ historial });
+      const response = new Historial({ id, vocacion, respuesta });
+      await response.save();
+      res.json({ response });
     } catch (error) {
-      res.status(400).json({ msg: "Error al guardar la cateforia" });
+      // console.log(historial.at(-1).respuesta)
+      //console.log(Respuesta)
     }
   },
   putArticulo: async (req, res) => {
@@ -56,25 +67,24 @@ const httpArticulos = {
       res.status(400).json({ msg: "Error al buscar la articulos" });
     }
   },
-  deleteArticulo: async (req, res) => {
+  deleteHistorial: async (req, res) => {
     try {
-      const { id } = req.params;
-      const historial = await Historial.findByIdAndDelete(id);
+      const historial = await Historial.deleteMany({});
       res.json({ historial });
     } catch (error) {
       res.status(400).json({ msg: "Error al buscar la articulos" });
     }
   },
-};
-
-const deleteCategoriasId = async (req, res) => {
+  deleteResponse : async (req, res) => {
   try {
     const { id } = req.params;
-    const historial = await Historial.findByIdAndDelete(id);
+    const dataRespuesta = await Historial.find({id: id},{_id:1})
+    const historial = await Historial.findByIdAndDelete(dataRespuesta);
     res.json({ historial });
   } catch (error) {
-    res.status(400).json({ msg: "Error al buscar la categoria" });
+    res.status(400).json({ msg: "Error al buscar la respuesta" });
   }
+}
 };
 
 export default httpArticulos
