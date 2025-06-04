@@ -22,7 +22,7 @@ class Expert {
             model: "gemini-2.0-flash",
             contents: this._respuesta,
             config: {
-                systemInstruction: `${this._inputexpert},y eres el ${this._vocacion} este es el historial de la conversacion ${this._historial}`,
+                systemInstruction: `${this._inputexpert},y eres el ${this._vocacion} este es el historial de la conversacion ${this._historial} respuesta cortas`,
             }
         });
         return response.text

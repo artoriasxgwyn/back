@@ -18,7 +18,7 @@ const httpArticulos = {
   getArticulosId: async (req, res) => {
     try {
       const { id } = req.params;
-      const dataRespuesta = await Historial.find({id: id},{_id:1});
+      const dataRespuesta = await Historial.find({ id: id }, { _id: 1 });
       const historial = await Historial.findById(dataRespuesta);
       res.json({ historial });
     } catch (error) {
@@ -50,8 +50,7 @@ const httpArticulos = {
       await response.save();
       res.json({ response });
     } catch (error) {
-      // console.log(historial.at(-1).respuesta)
-      //console.log(Respuesta)
+      res.status(400).json({ msg: "Error al guardar la respuesta" });
     }
   },
   putArticulo: async (req, res) => {
@@ -75,16 +74,16 @@ const httpArticulos = {
       res.status(400).json({ msg: "Error al buscar la articulos" });
     }
   },
-  deleteResponse : async (req, res) => {
-  try {
-    const { id } = req.params;
-    const dataRespuesta = await Historial.find({id: id},{_id:1})
-    const historial = await Historial.findByIdAndDelete(dataRespuesta);
-    res.json({ historial });
-  } catch (error) {
-    res.status(400).json({ msg: "Error al buscar la respuesta" });
+  deleteResponse: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const dataRespuesta = await Historial.find({ id: id }, { _id: 1 })
+      const historial = await Historial.findByIdAndDelete(dataRespuesta);
+      res.json({ historial });
+    } catch (error) {
+      res.status(400).json({ msg: "Error al buscar la respuesta" });
+    }
   }
-}
 };
 
 export default httpArticulos

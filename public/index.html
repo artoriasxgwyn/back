@@ -1,11 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-    <h1>Adso Socorro</h1>
+    <h1 id="xd"></h1>
+    <div class="Padre">
+        <header class="header">
+            <h1>Conversacion entre 2 expertos</h1>
+        </header>
+        <section class="content">
+            <div id="cajaconversacion">
+
+            </div>
+            <div class="botones">
+                <button id="expert1">Res expert1</button>
+                <button id="expert2">Res expert2</button>
+                <button id="borrarHistorial">borrar historial</button>
+            </div>
+        </section>
+        <footer class="footer">
+            <p>schopenhauer</p>
+        </footer>
+    </div>
+
+    <script>
+        let historial = []
+        document.getElementById("expert1").addEventListener("click", async () => {
+            await fetch("http://localhost:3000/api/expert1", { method: 'POST' })
+                .then(res => res.json())
+                .then(data => {
+                    historial.push(data.response)
+                    console.log(data)
+                    pintarRespuestas()
+                })
+                .catch(err => console.error("Error:", err));
+        });
+
+        document.getElementById("expert2").addEventListener("click", async () => {
+            await fetch("http://localhost:3000/api/expert2", { method: 'POST' })
+                .then(res => res.json())
+                .then(data => {
+                    historial.push(data.response)
+                    console.log(data)
+                    pintarRespuestas()
+                })
+                .catch(err => console.error("Error:", err));
+        });
+        document.getElementById("borrarHistorial").addEventListener("click", async () => {
+            await fetch("http://localhost:3000/api/expert1", { method: 'DELETE' })
+                .then(res => res.json())
+                .then(data => {
+                    historial=[]
+                    historial.push(data)
+                    console.log(data)
+                    pintarRespuestas()
+                })
+                .catch(err => console.error("Error:", err));
+        });
+
+
+        function pintarRespuestas() {
+            let Caja = document.getElementById("cajaconversacion")
+            Caja.textContent = "";
+            historial.forEach((item, i) => {
+                let experto1 = document.createElement("p")
+                let experto2 = document.createElement("p")
+                experto1.id = "expert1c"
+                experto2.id = "expert2c"
+                console.log(historial[i].vocacion)
+                if (item.vocacion == "Filosofo") {
+                    experto1.textContent = item.respuesta
+                    Caja.appendChild(experto1)
+                } else if (item.vocacion == "Economista") {
+                    experto2.textContent = item.respuesta
+                    Caja.appendChild(experto2)
+                }
+
+            })
+        }
+        
+        /*
+        function pintarRespuestas() {
+            const Caja = document.querySelector(".cajaconversacion");
+            Caja.innerHTML = ""; // Limpia todo antes de volver a pintar
+
+            historial.forEach(item => {
+                const parrafo = document.createElement("p");
+                parrafo.textContent = item.respuesta;
+
+                // Estilos para cada tipo de experto
+                if (item.vocacion === "Filosofo") {
+                    parrafo.style.textAlign = "right";
+                    parrafo.style.backgroundColor = "#f0e68c";
+                } else if (item.vocacion === "Economista") {
+                    parrafo.style.textAlign = "left";
+                    parrafo.style.backgroundColor = "#add8e6";
+                }
+
+                parrafo.style.padding = "10px";
+                parrafo.style.margin = "5px";
+                parrafo.style.borderRadius = "8px";
+
+                Caja.appendChild(parrafo);
+            });
+        }*/
+    </script>
+    <style>
+        * {
+            box-sizing: border-box;
+            padding: 0px;
+            margin: 0px;
+        }
+
+        #expert1 {
+            border-radius: 8px;
+        }
+
+        #expert1c {
+            background-color: beige;
+            width: 50%;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        #expert2c {
+            background-color: blanchedalmond;
+            width: 50%;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        #expert2 {
+            border-radius: 8px;
+        }
+
+        #borrarHistorial {
+            border-radius: 8px;
+        }
+
+        #cajaconversacion {
+            overflow: scroll;
+            background-color: azure;
+            width: 80%;
+            height: 90%;
+            border: solid;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            height: 10vh;
+            text-align: center;
+            background-color: whitesmoke;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+
+            align-items: center;
+            background-color: beige;
+        }
+
+        .footer {
+            height: 10vh;
+            text-align: center;
+            background-color: whitesmoke;
+        }
+
+        .Padre {
+            display: grid;
+            min-height: 100dvh;
+            grid-template-rows: auto 1fr auto;
+        }
+    </style>
 </body>
+
 </html>
