@@ -21,6 +21,8 @@
                 <button id="expert1">Res expert1</button>
                 <button id="expert2">Res expert2</button>
                 <button id="borrarHistorial">borrar historial</button>
+                <button id="obtenerHistorial">obtenerHistorial</button>
+                <button id="obtenerRespuesta">obtenerRespuesta</button>
             </div>
         </section>
         <footer class="footer">
@@ -30,6 +32,26 @@
 
     <script>
         let historial = []
+        document.getElementById("obtenerHistorial").addEventListener("click", async () => {
+            await fetch("http://localhost:3000/api/expert2/")
+                .then(res => res.json())
+                .then(data => {
+                    historial = data.historial
+                    console.log(historial)
+                    pintarRespuestas()
+                })
+                .catch(err => console.error("Error:", err));
+        });
+        document.getElementById("obtenerRespuesta").addEventListener("click", async () => {
+            await fetch("http://localhost:3000/api/expert1/1")
+                .then(res => res.json())
+                .then(data => {
+                    historial = [data.historial]
+                    console.log(data)
+                    pintarRespuestas()
+                })
+                .catch(err => console.error("Error:", err));
+        });
         document.getElementById("expert1").addEventListener("click", async () => {
             await fetch("http://localhost:3000/api/expert1", { method: 'POST' })
                 .then(res => res.json())
@@ -55,7 +77,7 @@
             await fetch("http://localhost:3000/api/expert1", { method: 'DELETE' })
                 .then(res => res.json())
                 .then(data => {
-                    historial=[]
+                    historial = []
                     historial.push(data)
                     console.log(data)
                     pintarRespuestas()
@@ -67,23 +89,30 @@
         function pintarRespuestas() {
             let Caja = document.getElementById("cajaconversacion")
             Caja.textContent = "";
+            Caja.style.display = "flex";
             historial.forEach((item, i) => {
+                console.log(item)
+                let Experto1 = document.createElement("div")
+                let Experto2 = document.createElement("div")
                 let experto1 = document.createElement("p")
                 let experto2 = document.createElement("p")
+                Experto1.id = "Expert1c"
+                Experto2.id = "Expert2c"
                 experto1.id = "expert1c"
                 experto2.id = "expert2c"
-                console.log(historial[i].vocacion)
                 if (item.vocacion == "Filosofo") {
                     experto1.textContent = item.respuesta
-                    Caja.appendChild(experto1)
+                    Experto1.appendChild(experto1)
+                    Caja.appendChild(Experto1)
                 } else if (item.vocacion == "Economista") {
                     experto2.textContent = item.respuesta
-                    Caja.appendChild(experto2)
+                    Experto2.appendChild(experto2)
+                    Caja.appendChild(Experto2)
                 }
 
             })
         }
-        
+
         /*
         function pintarRespuestas() {
             const Caja = document.querySelector(".cajaconversacion");
@@ -117,6 +146,19 @@
             margin: 0px;
         }
 
+        #Expert1c {
+            width: 100%;
+            display: flex;
+            justify-content: end;
+        }
+
+        #Expert2c {
+            width: 100%;
+            display: flex;
+            justify-content: start;
+
+        }
+
         #expert1 {
             border-radius: 8px;
         }
@@ -124,15 +166,12 @@
         #expert1c {
             background-color: beige;
             width: 50%;
-            display: flex;
-            justify-content: flex-start;
         }
 
         #expert2c {
             background-color: blanchedalmond;
             width: 50%;
-            display: flex;
-            justify-content: flex-end;
+
         }
 
         #expert2 {
@@ -150,8 +189,9 @@
             height: 90%;
             border: solid;
             border-radius: 8px;
-            display: flex;
+            gap: 10px;
             flex-direction: column;
+            max-height: 70vh;
         }
 
         .header {

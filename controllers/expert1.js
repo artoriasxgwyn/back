@@ -28,12 +28,8 @@ const httpArticulos = {
   postExpert1: async (req, res) => {
     try {
       const historial = await Historial.find();
-      const Respuesta = (typeof (historial.at(-1)?.respuesta) === "string")
-        ? historial.at(-1).respuesta
-        : "no hay respuesta";
-      let num = (typeof (historial.at(-1)?.id) === "number")
-        ? historial.at(-1).id
-        : 0;
+      const Respuesta = (typeof (historial.at(-1)?.respuesta) === "string") ? historial.at(-1).respuesta : "no hay respuesta";
+      let num = (typeof (historial.at(-1)?.id) === "number") ? historial.at(-1).id : 0;
       let idauto = await autoincremental(num);
       let id = idauto;
       // no se por que hay recordar colocar y quita el historial.find
