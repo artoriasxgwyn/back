@@ -6,6 +6,7 @@ let respuesta = "";
 
 const httpArticulos = {
   getArticulos: async (req, res) => {
+    req.method
     try {
       //find({descripcion: "Thermomix"},{_id:0, precio:1}) 
       const historial = await Historial.find();
