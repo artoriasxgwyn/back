@@ -12,7 +12,6 @@ const app = express();
 
 app.use(cors());
 app.use(express.json())
-app.use(express.static("public"))
 app.use("/api/expert1",expert1)
 app.use("/api/expert2",expert2)
 app.use(express.static("public"))

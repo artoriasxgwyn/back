@@ -1,7 +1,7 @@
 import Router from "express"
 import httpArticulos from "../controllers/expert1.js"
 
-const router = Router()
+const router = Router.Router()
 
 router.get("/", httpArticulos.getArticulos)
 
