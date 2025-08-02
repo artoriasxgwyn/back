@@ -1,18 +1,18 @@
 import express from "express"
-import clients from "../controllers/clients.js"
+//import clients from "../controllers/clients.js"
 
-const Router = express.Router()
+const Router = express()
 
-Router.get("/", () => {
+Router.get("/", (req,res) => {
+    res.send("hola")
+})
+Router.post("/", (req,res) => {
+    res.send("hola")
+})
+Router.put("/", (req,res) => {
 
 })
-Router.post("/", () => {
+Router.delete("/", (req,res) => {
 
 })
-Router.put("/", () => {
-
-})
-Router.delete("/", () => {
-
-})
-export {Router};
+export { Router };
