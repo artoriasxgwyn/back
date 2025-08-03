@@ -4,7 +4,7 @@ const Router = express()
 
 Router.get("/", (req,res) => {
    res.status(400)
-   res.send("ijueputa")
+   res.send("cp")
 })
 Router.post("/", (req,res) => {
 
