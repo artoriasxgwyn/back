@@ -28,8 +28,8 @@ const getCategoriasId = async (req, res) => {
 const postExpert2 = async (req, res) => {
   try {
     const historial = await Historial.find();
-    const Respuesta = (typeof (historial.at(-1)?.respuesta) === "string")? historial.at(-1).respuesta: "no hay respuesta";
-    let num = (typeof (historial.at(-1)?.id) === "number")? historial.at(-1).id: 0;
+    const Respuesta = (typeof (historial.at(-1)?.respuesta) === "string") ? historial.at(-1).respuesta : "no hay respuesta";
+    let num = (typeof (historial.at(-1)?.id) === "number") ? historial.at(-1).id : 0;
     let idauto = await autoincremental(num);
     let id = idauto;
     // no se por que hay recordar colocar y quita el historial.find
@@ -67,13 +67,13 @@ const putCategoriasId = async (req, res) => {
   }
 };
 const deleteHistorial = async (req, res) => {
-    try {
-      const historial = await Historial.deleteMany({});
-      res.json({ historial });
-    } catch (error) {
-      res.status(400).json({ msg: "Error al buscar la articulos" });
-    }
+  try {
+    const historial = await Historial.deleteMany({});
+    res.json({ historial });
+  } catch (error) {
+    res.status(400).json({ msg: "Error al buscar la articulos" });
   }
+}
 const deleteResponse = async (req, res) => {
   try {
     const { id } = req.params;
