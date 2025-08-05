@@ -1,18 +1,18 @@
 import express from "express"
 import mongoose from "mongoose"
-import { Router as client } from "./routes/clients.js"
+import  client  from "./routes/clients.js"
 import products from "./routes/products.js"
 import register from "./routes/sign_up.js"
 import { Router as sales } from "./routes/sales.js"
-import dotenv from 'dotenv';
+import "dotenv/config";
 
-dotenv.config();
 const app = express()
 app.use(express.json())
-express().use("/api/clientes", client)
+app.use("/api/clientes", client)
 app.use("/api/productos", products)
 app.use("/api/sales", sales)
-app.use("/api/register",register)
+app.use("/api/registro", register)
+
 app.listen(process.env.PORT, () => {
     try {
         console.log(`Ay Dios ${process.env.PORT}`);
