@@ -1,4 +1,4 @@
-//import modelClient from "../models/clients.js"
+import modelClient from "../models/clients.js"
 
 const endpointsClients = {
     createClient: async function (req, res) {
@@ -44,3 +44,4 @@ const endpointsClients = {
         }
     }
 }
+export default endpointsClients

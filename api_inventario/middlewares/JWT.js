@@ -1,16 +1,19 @@
-const generarJWT = function (uid) {
-    return new Promise(function (resolve, reject) {
+import jwt from 'jsonwebtoken';
+
+const generarJWT = (uid) => {
+    return new Promise((resolve, reject) => {
         const payload = { uid };
         jwt.sign(payload, process.env.SECRETORPRIVATEKEY, {
-            expiresIn: "4h"
-        }), (err, token) => {
+            expiresIn: "4h"//4h
+        }, (err, token) => {
+
             if (err) {
-                console.log(err)
-                reject("no se genero el token")
+                console.log(err);
+                reject("No se pudo generar el token")
             } else {
                 resolve(token)
             }
-        }
+        })
     })
 }
 
@@ -22,22 +25,24 @@ const validar = async (req, res, next) => {
         })
     }
     try {
-        const {uid}= jwt.verify(token, proccess.env.SECRETORPRIVATEKEY)
+        const { uid } = jwt.verify(token, process.env.SECRETORPRIVATEKEY)
         let usuario = await Holder.findByid(uid);
-        if(!usuario){
+        if (!usuario) {
             return res.status(401).json({
-                msg:"usuario no existe"
+                msg: "usuario no existe"
             })
         }
-        if(usuario.estado == 0){
-          return res.status(401).json({
-            msg:"usuario inactivo"
-          })
+        if (usuario.estado == 0) {
+            return res.status(401).json({
+                msg: "usuario inactivo"
+            })
         }
         next();
     } catch (error) {
         res.status(401).json({
-            msg:"token no valido"
+            msg: "token no valido"
         })
     }
 }
+
+export { validar, generarJWT }

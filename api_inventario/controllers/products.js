@@ -51,3 +51,5 @@ const endpointsProducts = {
         }
     }
 }
+
+export default endpointsProducts

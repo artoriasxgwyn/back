@@ -1,4 +1,4 @@
-import modelSale from "../models/sales.js"
+import {arrayProducts,modelSales} from "../models/sales.js"
 
 const endpointsSales = {
     registerSales: async (req, res) => {
@@ -31,3 +31,5 @@ const endpointsSales = {
     },
   
 }
+
+export default endpointsSales

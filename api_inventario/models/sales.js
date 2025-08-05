@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import products from "./products";
 
 const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;

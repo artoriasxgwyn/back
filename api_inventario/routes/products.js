@@ -1,5 +1,5 @@
 import express from "express"
-//import product from "../controllers/products.js"
+import product from "../controllers/products.js"
 const Router = express()
 
 Router.get("/", (req,res) => {
