@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import users from '../models/users.js';
 
 const generarJWT = (uid) => {
     return new Promise((resolve, reject) => {
@@ -19,6 +20,7 @@ const generarJWT = (uid) => {
 
 const validar = async (req, res, next) => {
     const token = req.header("x-token");
+
     if (!token) {
         return res.status(401).json({
             msg: "No hay token en la peticion"
@@ -26,15 +28,10 @@ const validar = async (req, res, next) => {
     }
     try {
         const { uid } = jwt.verify(token, process.env.SECRETORPRIVATEKEY)
-        let usuario = await Holder.findByid(uid);
+        let usuario = await users.findById(uid);
         if (!usuario) {
             return res.status(401).json({
                 msg: "usuario no existe"
-            })
-        }
-        if (usuario.estado == 0) {
-            return res.status(401).json({
-                msg: "usuario inactivo"
             })
         }
         next();

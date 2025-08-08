@@ -1,11 +1,13 @@
 import express from "express"
 import clients from "../controllers/clients.js"
+import {validar} from "../middlewares/JWT.js"
 
 const Router = express()
 
-Router.get("/", (req, res) => {
-    res.send("hola")
+Router.get("/",validar,(req,res)=>{
+res.send("hola amor")
 })
+
 Router.post("/", (req, res) => {
     res.send("hola")
 })

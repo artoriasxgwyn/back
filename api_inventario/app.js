@@ -2,9 +2,11 @@ import express from "express"
 import mongoose from "mongoose"
 import  client  from "./routes/clients.js"
 import products from "./routes/products.js"
-import register from "./routes/sign_up.js"
 import { Router as sales } from "./routes/sales.js"
+import register from "./routes/sign_up.js"
+import login from "./routes/sign_in.js"
 import "dotenv/config";
+
 
 const app = express()
 app.use(express.json())
@@ -12,6 +14,7 @@ app.use("/api/clientes", client)
 app.use("/api/productos", products)
 app.use("/api/sales", sales)
 app.use("/api/registro", register)
+app.use("/api/iniciarSesion",login)
 
 app.listen(process.env.PORT, () => {
     try {
