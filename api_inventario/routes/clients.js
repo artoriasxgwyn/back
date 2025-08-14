@@ -4,16 +4,14 @@ import {validar} from "../middlewares/JWT.js"
 
 const Router = express()
 
-Router.get("/",validar,(req,res)=>{
-res.send("hola amor")
-})
-Router.get("/all",clients.getAllClients)
+Router.get("/:id",validar,clients.getClient)
+
+Router.get("/",clients.getAllClients)
 
 Router.post("/",clients.createClient)
-Router.put("/", (req, res) => {
 
-})
-Router.delete("/", (req, res) => {
+Router.put("/:id", clients.ModifyClient)
 
-})
+Router.delete("/:id", clients.deleteClient)
+
 export default Router ;

@@ -12,7 +12,7 @@ const app = express()
 app.use(express.json())
 app.use("/api/clientes", client)
 app.use("/api/productos", products)
-app.use("/api/sales", sales)
+app.use("/api/ventas", sales)
 app.use("/api/registro", register)
 app.use("/api/iniciarSesion",login)
 
