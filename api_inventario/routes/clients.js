@@ -7,10 +7,9 @@ const Router = express()
 Router.get("/",validar,(req,res)=>{
 res.send("hola amor")
 })
+Router.get("/all",clients.getAllClients)
 
-Router.post("/", (req, res) => {
-    res.send("hola")
-})
+Router.post("/",clients.createClient)
 Router.put("/", (req, res) => {
 
 })

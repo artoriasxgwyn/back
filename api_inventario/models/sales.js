@@ -3,16 +3,14 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
-const arrayProducts = new Schema({
-    idProduct: String,
-    cantidad: Number
-});
-
 const modelSales = new Schema({
     idClient: { type: String },
     idVenta: { type: Number },
     date: { type: Date, default: Date.now },
-    products:[arrayProducts]
+    products: [{
+        idProduct: { type: String, required: true },
+        cantidad: { type: Number, required: true }
+    }]
 });
-
-export {arrayProducts,modelSales}
+const modelsales = mongoose.model("modelsales", modelSales)
+export { modelsales }
