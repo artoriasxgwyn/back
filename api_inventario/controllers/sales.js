@@ -18,7 +18,7 @@ const endpointsSales = {
             let product = { idProduct, cantidad }
             sale.products.push(product)
             await sale.save()
-            res.json(sale).status(200).send("añadido de productos exitoso")
+            res.status(200).json(sale)
         } catch (error) {
             console.log(error)
             res.send("No ha sido exitoso los articulos asociados a la venta")
@@ -56,9 +56,14 @@ const endpointsSales = {
     },
     getAllSalesOfProducts: async (req, res) => {
         try {
-           // let { id } = req.params
+            let { id } = req.params
             console.log(typeof (id))
-            const ventas = await modelSales.find({ 'products.idProduct': id });
+            let data1= await modelSales.find({ 'products.idProduct': '689e92e02fb0081c8e7a4e1b' })
+            console.log(data1)
+             console.log("mueranse")
+            const ventas = await modelSales.find({
+                products: { $elemMatch: { idProduct: id.trim() } }
+            });
             console.log(ventas)
             res.json(ventas)
         } catch (e) {

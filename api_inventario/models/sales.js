@@ -7,8 +7,8 @@ const modelSales = new Schema({
     idClient: { type: String },
     date: { type: Date, default: Date.now },
     products: [{
-        idProduct: { type: String, required: true },
-        cantidad: { type: Number, required: true }
+        idProduct: { type: String},
+        cantidad: { type: Number}
     }]
 });
 
