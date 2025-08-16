@@ -1,4 +1,6 @@
 import modelProduct from "../models/products.js"
+import IA from "../middlewares/IA.js"
+import { model } from "mongoose";
 
 const endpointsProducts = {
     registerProduct: async (req, res) => {
@@ -55,18 +57,26 @@ const endpointsProducts = {
     },
     generateDescription: async (req, res) => {
         try {
-
+            let { id } = req.params
+            let product = await modelProduct.findById(id)
+            console.log(product.name)
+            let AI = await IA("Vas a recibir el nombre de un producto Y quiero me devuelvas la descripcion que le harias a ese producto, quiero una descripcion corta no debe ser larga debe ser breve y solo la descripcion nada mas, no saludes solo entrega la descripcion", product.name)
+            res.status(200).send(AI)
         } catch (error) {
-
+            res.send(error)
         }
     },
-    generateDescriptionPrize: async (req, res) => {
+    generatePrize: async (req, res) => {
         try {
-
+            let { id } = req.params
+            let product = await modelProduct.findById(id)
+            console.log(product.name)
+            let AI = await IA("Vas a recibir el nombre de un producto Y quiero me devuelvas una sugerencia de precio que le harias a ese producto, quiero solo el precio y el precio quiero que lo des en base a una unidad y aun precio en COP como quieras no te compliques", product.name)
+            res.status(200).send(AI)
         } catch (error) {
-
+            res.send(error)
         }
     }
 }
 
-export default endpointsProducts
+export default endpointsProducts 
