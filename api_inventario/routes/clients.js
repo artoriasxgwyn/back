@@ -6,12 +6,12 @@ const Router = express()
 
 Router.get("/:id",validar,clients.getClient)
 
-Router.get("/",clients.getAllClients)
+Router.get("/",validar,clients.getAllClients)
 
-Router.post("/",clients.createClient)
+Router.post("/",validar,clients.createClient)
 
-Router.put("/:id", clients.ModifyClient)
+Router.put("/:id",validar,clients.ModifyClient)
 
-Router.delete("/:id", clients.deleteClient)
+Router.delete("/:id",validar,clients.deleteClient)
 
 export default Router ;
