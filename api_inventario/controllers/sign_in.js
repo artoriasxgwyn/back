@@ -10,7 +10,6 @@ async function sign_in(req, res) {
         if (!validPassword) {
             res.send("no exite el usuario")
         }
-       
         generarJWT(user._id)
             .then((x) => {
                  res.header('x-token', x).send("si existe el usuario");
