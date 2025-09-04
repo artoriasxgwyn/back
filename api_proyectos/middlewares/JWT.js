@@ -27,8 +27,8 @@ const validar = async (req, res, next) => {
         })
     }
     try {
-        const { userData } = jwt.verify(token, process.env.SECRETORPRIVATEKEY)
-        let usuario = await users.findById(userData);
+        const  userData  = jwt.verify(token, process.env.SECRETORPRIVATEKEY)
+        let usuario = await users.findById(userData._id);
         if (!usuario) {
             return res.status(401).json({
                 msg: "usuario no existe"
