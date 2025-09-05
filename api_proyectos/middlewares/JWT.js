@@ -1,9 +1,10 @@
+
 import jwt from 'jsonwebtoken';
 import users from '../models/users.js';
 
-const generarJWT = (userData) => {
+const generarJWT = (uid) => {
     return new Promise((resolve, reject) => {
-        const payload = { userData };
+        const payload = { uid };
         jwt.sign(payload, process.env.SECRETORPRIVATEKEY, {
             expiresIn: "4h"
         },
@@ -27,8 +28,9 @@ const validar = async (req, res, next) => {
         })
     }
     try {
-        const  userData  = jwt.verify(token, process.env.SECRETORPRIVATEKEY)
-        let usuario = await users.findById(userData._id);
+        const uid = jwt.verify(token, process.env.SECRETORPRIVATEKEY)
+        let usuario = await users.findById(uid);
+        req.body = uid;
         if (!usuario) {
             return res.status(401).json({
                 msg: "usuario no existe"
