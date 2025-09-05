@@ -8,8 +8,8 @@ const modelCategorie = new Schema({
     description: String,
     isActive: Boolean,
     createdBy: ObjectId,
-    createdAt: Date,
+    createdAt: { type: Date, default: Date.now },
     updateAt: Date
-})
+});
 
-export default mongoose.model("modelCategorie",modelCategorie)
+export default mongoose.model("modelCategorie", modelCategorie)

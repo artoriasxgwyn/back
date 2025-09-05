@@ -8,8 +8,8 @@ const modelComment = new Schema({
     author: ObjectId,
     projectId: ObjectId,
     editedAt: Date,
-    createdAt: Date,
-    updateAt:Date
+    createdAt: { type: Date, default: Date.now },
+    updateAt: Date
 });
 
 export default mongoose.model("modelComment", modelComment);

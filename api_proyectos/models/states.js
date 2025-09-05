@@ -7,8 +7,8 @@ const modelState = new Schema({
     description: String,
     type: String,
     isActive: Boolean,
-    createdAt: Date,
-    updateAt:Date
+    createdAt: { type: Date, default: Date.now },
+    updateAt: Date
 });
 
 export default mongoose.model("modelState", modelState);

@@ -14,7 +14,7 @@ const modelUser = new Schema({
     isActive: Boolean,
     isEmailVerified: Boolean,
     lastLogin: Date,
-    createdAt: Date,
+    createdAt: { type: Date, default: Date.now },
     updateAt: Date
 });
 

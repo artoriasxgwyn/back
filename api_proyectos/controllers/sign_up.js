@@ -1,14 +1,14 @@
-import users from "../models/users.js"
+import Users from "../models/users.js"
 import { generarJWT } from "../middlewares/JWT.js"
 import bcrypt from "bcryptjs"
 
 async function sign_up(req, res) {
     try {
-        let { userName, password } = req.body
+        let { firstName, lastName, email, password, avatar, phone, globalRole, isActive, isEmailVerified, lastLogin, createdAt, updateAt } = req.body
         const salt = bcrypt.genSaltSync();
         password = bcrypt.hashSync(password, salt)
-        const user = new users({ userName, password });
-        console.log(userName)
+        const user = new Users({ firstName, lastName, email, password, avatar, phone, globalRole, isActive, isEmailVerified, lastLogin, createdAt, updateAt });
+        console.log(UserName)
         await user.save()
         generarJWT(user)
             .then((x) => {

@@ -3,12 +3,12 @@ import bcrypt from "bcryptjs";
 import { generarJWT } from "../middlewares/JWT.js"
 
 async function sign_in(req, res) {
-    const { UserName, Password } = req.body
-    const user = await Users.findOne({ UserName })
+    const { firstName, password } = req.body
+    const user = await Users.findOne({ firstName })
     try {
-        const validPassword = bcrypt.compareSync(Password, user.Password);
+        const validPassword = bcrypt.compareSync(password, user.password);
         if (!validPassword) {
-            res.send("no exite el usuario")
+            res.send("contaseña incorrecta").status(400);
         }
         generarJWT(user._id)
             .then((x) => {

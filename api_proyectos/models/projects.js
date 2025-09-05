@@ -21,8 +21,8 @@ const modelProjects = new Schema({
     actualHours: Number,
     budget: Number,
     isActive: Boolean,
-    tags: [    ],
-    createdAt: Date,
+    tags: [],
+    createdAt: { type: Date, default: Date.now },
     updatedAt: Date
 });
 

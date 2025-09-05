@@ -20,7 +20,7 @@ const modelTask = new Schema({
 
     ],
     isActive: Boolean,
-    createdAt: Date,
+    createdAt: { type: Date, default: Date.now },
     updateAt: Date
 });
 
