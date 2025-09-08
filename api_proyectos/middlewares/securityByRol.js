@@ -1,13 +1,15 @@
 import users from "../models/users.js"
-let roleOnlyRecurse = ["admin", "projectManager", "developer",];
+import roles from "../models/roles.js"
+let roleOnlyRecurse = ["admin", "projectManager", "developer"];
 let roleOnlyProject = ["admin", "projectManager"];
 
-const onlyGlobal = function (req, res, next) {
+const onlyAdmin = async function (req, res, next) {
     try {
         let { uid } = req.body;
-        let user = users.findById(uid);
-        let role = user.globalRole === "admin";
-        if (role) {
+        console.log(uid)
+        let user = await users.findById(uid);
+        let role = await roles.findById(user.globalRole);
+        if (role.name === "Admin") {
             next()
         };
     } catch (error) {
@@ -24,8 +26,13 @@ const onlyProject = function (req, res, next) {
         if (!validation) {
             res.status(403).send("no tienes acceso a esta ruta")
         };
+        if (role.name === "Admin") {
+            next()
+        };
+        
+        next()
     } catch (e) {
-
+        res.send(e)
     }
 };
 const onlyRecurse = function (req, res, next) {
@@ -42,4 +49,4 @@ const onlyRecurse = function (req, res, next) {
     }
 };
 
-export { onlyGlobal, onlyProject, onlyRecurse }
+export { onlyAdmin, onlyProject, onlyRecurse }

@@ -1,12 +1,8 @@
-import expres from "express";
+import express from "express";
+import sign_in from "../controllers/sign_in.js"
 
-const router = expres();
+const router = express();
 
-router.get("/",(req,res)=>{
-
-});
-router.post("/",(req,res)=>{
-
-});
+router.post("/",sign_in);
 
 export default router;

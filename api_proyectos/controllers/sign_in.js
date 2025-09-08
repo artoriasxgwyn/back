@@ -2,6 +2,20 @@ import Users from "../models/users.js"
 import bcrypt from "bcryptjs";
 import { generarJWT } from "../middlewares/JWT.js"
 
+/*
+{
+    "firstName":"johann",
+    "lastName":"Silva",
+    "email":"johannsilvamendez@gmail.com",
+    "password":"ryomen445",
+    "avatar":"xdxexo",
+    "phone":"3213635730",
+    "global": "68bc9567b90574defd8b5581",
+    "isActive":"true",
+    "isEmailVerified":true,
+    "globalRole":"68bc9567b90574defd8b5581"
+}
+*/
 async function sign_in(req, res) {
     const { firstName, password } = req.body
     const user = await Users.findOne({ firstName })
@@ -12,7 +26,7 @@ async function sign_in(req, res) {
         }
         generarJWT(user._id)
             .then((x) => {
-                 res.header('x-token', x).send("si existe el usuario");
+                res.header('x-token', x).send(`si exite el usuario: ${x}`);
             })
     }
     catch (e) {

@@ -4,18 +4,16 @@ import bcrypt from "bcryptjs"
 
 async function sign_up(req, res) {
     try {
-        let { firstName, lastName, email, password, avatar, phone, globalRole, isActive, isEmailVerified, lastLogin, createdAt, updateAt } = req.body
+        let { firstName, lastName, email, password, avatar, phone, globalRole, isActive, isEmailVerified, } = req.body
         const salt = bcrypt.genSaltSync();
         password = bcrypt.hashSync(password, salt)
-        const user = new Users({ firstName, lastName, email, password, avatar, phone, globalRole, isActive, isEmailVerified, lastLogin, createdAt, updateAt });
-        console.log(UserName)
+        const user = new Users({ firstName, lastName, email, password, avatar, phone, globalRole, isActive, isEmailVerified });
         await user.save()
-        generarJWT(user)
+        generarJWT(user._id)
             .then((x) => {
                 console.log(x)
                 res.send(x)
             })
-
     } catch (error) {
         res.send("error").status(400)
         console.log(error)
