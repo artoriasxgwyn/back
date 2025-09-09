@@ -29,7 +29,11 @@ const validar = async (req, res, next) => {
     try {
         const uid = jwt.verify(token, process.env.SECRETORPRIVATEKEY)
         let usuario = await users.findById(uid.uid);
-        req.body = uid;
+        req.uid = uid;
+        console.log(usuario)
+        if(!usuario.isActive){
+        res.status(403).send("No esta activo")
+        };
         if (!usuario) {
             return res.status(401).json({
                 msg: "usuario no existe"

@@ -17,9 +17,10 @@ import { generarJWT } from "../middlewares/JWT.js"
 }
 */
 async function sign_in(req, res) {
-    const { firstName, password } = req.body
-    const user = await Users.findOne({ firstName })
     try {
+        const { firstName, password } = req.body
+        const user = await Users.findOne({ firstName })
+        console.log(user)
         const validPassword = bcrypt.compareSync(password, user.password);
         if (!validPassword) {
             res.send("contaseña incorrecta").status(400);

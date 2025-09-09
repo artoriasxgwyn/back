@@ -3,12 +3,11 @@ import modelUser from "../models/users.js"
 const functionsUsers = {
     getUsers: async (req, res) => {
         try {
-            console.log(req)
-            let users = await modelUser.find()
-            res.json(users).send("ahi estan los roles")
+            let users = await modelUser.find();
+            res.json(users).send("ahi estan los roles");
         }
         catch (e) {
-
+            res.send(e);
         }
     },
     actualUser: async (req, res) => {
@@ -24,9 +23,8 @@ const functionsUsers = {
     },
     updateUser: async (req, res) => {
         try {
-            
-            let { uid ,firstName, lastName } = req.body;
-            console.log(firstName)
+            let { uid } = req.uid
+            let { firstName, lastName } = req.body;
             const user = await modelUser.findByIdAndUpdate(uid,
                 { firstName, lastName },
                 { new: true }
@@ -37,6 +35,17 @@ const functionsUsers = {
         };
     },
     deleteUser: async (req, res) => {
+        try {
+            let { id } = req.params;
+            let isActive = false;
+            const user = await modelUser.findByIdAndUpdate(id,
+                { isActive },
+                { new: true }
+            );
+            res.send(user);
+        } catch (e) {
+            res.send(e);
+        }
     }
 }
 

@@ -8,6 +8,7 @@ const router = express();
 router.get("/", validar, onlyAdmin, functionsUsers.getUsers);
 router.get("/profile", validar, functionsUsers.actualUser);
 router.post("/profile", validar, functionsUsers.updateUser);
-router.delete("/", validar);
+router.delete("/:id", validar, onlyAdmin, functionsUsers.deleteUser);
+//router.put("/")
 
 export default router;

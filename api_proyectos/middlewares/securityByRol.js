@@ -5,7 +5,7 @@ let roleOnlyProject = ["admin", "projectManager"];
 
 const onlyAdmin = async function (req, res, next) {
     try {
-        let { uid } = req.body;
+        let { uid } = req.uid;
         console.log(uid)
         let user = await users.findById(uid);
         let role = await roles.findById(user.globalRole);
