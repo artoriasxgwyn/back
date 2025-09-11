@@ -1,17 +1,18 @@
 import express from "express"
 import clients from "../controllers/clients.js"
-import {validar} from "../middlewares/JWT.js"
 
-const Router = express()
+const Router = express.Router()
 
-Router.get("/:id",validar,clients.getClient)
+Router.get("/", () => {
 
-Router.get("/",validar,clients.getAllClients)
+})
+Router.post("/", () => {
 
-Router.post("/",validar,clients.createClient)
+})
+Router.put("/", () => {
 
-Router.put("/:id",validar,clients.ModifyClient)
+})
+Router.delete("/", () => {
 
-Router.delete("/:id",validar,clients.deleteClient)
-
-export default Router ;
+})
+export {Router};

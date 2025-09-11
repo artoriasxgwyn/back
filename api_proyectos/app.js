@@ -8,14 +8,14 @@ import user from "./routes/users.js"
 
 const app = express()
 app.use(express.json());
-app.use("/api/iniciarSesion",sign_in);
-app.use("/api/registrarse",sign_up);
-app.use("/api/roles",role);
-app.use("/api/users",user);
+app.use("/api/iniciarSesion", sign_in);
+app.use("/api/registrarse", sign_up);
+app.use("/api/roles", role);
+app.use("/api/users", user);
 app.listen(process.env.PORT, () => {
     try {
         console.log(`Ay Dios ${process.env.PORT}`);
-        mongoose.connect('mongodb://127.0.0.1/SwaggerBoy')
+        mongoose.connect(`mongodb+srv://userExperts:${process.env.CLAVEMONGO}@boss.61jcsip.mongodb.net/?retryWrites=true&w=majority&appName=BOSS`)
             .then(() => {
                 console.log("hola dios me voy  morir")
             })

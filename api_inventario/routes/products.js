@@ -1,14 +1,18 @@
 import express from "express"
 import product from "../controllers/products.js"
-import {validar} from "../middlewares/JWT.js"
-const Router = express()
+const Router = express.Router()
 
-Router.get("/",validar,product.getAllProduct)
-Router.get("/:id",validar,product.getProduct)
-Router.get("/descripcion/:id",validar,product.generateDescription)
-Router.get("/precio/:id",validar,product.generatePrize)
-Router.post("/",validar,product.registerProduct)
-Router.put("/:id",validar,product.modifyProduct)
-Router.delete("/:id",validar,product.deleteProduct)
+Router.get("/", () => {
+res.json("oña")
+console.log("holamimaol")
+})
+Router.post("/", () => {
 
+})
+Router.put("/", () => {
+
+})
+Router.delete("/", () => {
+
+})
 export default Router
