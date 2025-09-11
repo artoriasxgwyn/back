@@ -27,7 +27,8 @@ const endpointRoles = {
 
     },
     deleteRole: async (req, res) => {
-
+        let { id } = req.params
+        const roleEliminate = await modelClient.findByIdAndDelete(id);//68c33d7b8820cac56edf5983
     }
 }
 export default endpointRoles;
