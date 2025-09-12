@@ -1,4 +1,4 @@
-import modelRole from "../models/roles.js"
+import modelRole from "../models/roles.js";
 
 const endpointRoles = {
     getRole: async (req, res) => {
@@ -39,11 +39,11 @@ const endpointRoles = {
     deleteRole: async (req, res) => {
         try {
             let { id } = req.params;
-            let isActive = false;
+            let isActive = true;
             let role = await modelRole.findById(id);
-            if(role.name=="Admin"){
-              res.send("se desactiva y se traga el programa")
-            }
+            if (role.name == "Admin") {
+                res.status(403).send("se desactiva y se traga el programa")
+            };
             const roleDelete = await modelRole.findByIdAndUpdate(id,
                 { isActive },
                 { new: true }
@@ -54,11 +54,14 @@ const endpointRoles = {
         }
 
     },
-       changeRole: async (req, res) => {
+    changeRole: async (req, res) => {
         try {
             let { id } = req.params;
-            if(role._id.toString()==="68c33d233832715b1f797def"){
-              res.send("se desactiva y se traga el programa")
+            let role = await modelRole.findById(id);
+            console.log(typeof (role._id));
+
+            if (role._id.toString() === "68c33d233832715b1f797def") {
+                res.send("se desactiva y se traga el programa")
             }
             const roleDelete = await modelRole.findByIdAndUpdate(id,
                 { name },

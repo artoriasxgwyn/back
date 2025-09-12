@@ -9,6 +9,6 @@ router.get("/", validar, role.getRole);
 router.post("/", validar, onlyAdmin, role.addRole);
 router.put("/:id", validar, onlyAdmin, role.updateRole);
 router.delete("/:id", validar, onlyAdmin, role.deleteRole);
-router.put("/:id/role",validar,onlyAdmin,role.changeRole);
+router.put("/:id/role", validar, onlyAdmin, role.changeRole);
 
 export default router;
