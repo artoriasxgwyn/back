@@ -24,11 +24,51 @@ const endpointRoles = {
 
     },
     updateRole: async (req, res) => {
-
+        try {
+            let { id } = req.params;
+            let { name } = req.body;
+            const role = await modelRole.findByIdAndUpdate(id,
+                { name },
+                { new: true }
+            );
+            res.send(role)
+        } catch (error) {
+            res.send(error);
+        };
     },
     deleteRole: async (req, res) => {
-        let { id } = req.params
-        const roleEliminate = await modelClient.findByIdAndDelete(id);//68c33d7b8820cac56edf5983
+        try {
+            let { id } = req.params;
+            let isActive = false;
+            let role = await modelRole.findById(id);
+            if(role.name=="Admin"){
+              res.send("se desactiva y se traga el programa")
+            }
+            const roleDelete = await modelRole.findByIdAndUpdate(id,
+                { isActive },
+                { new: true }
+            );
+            res.send(roleDelete);
+        } catch (error) {
+            res.send(error)
+        }
+
+    },
+       changeRole: async (req, res) => {
+        try {
+            let { id } = req.params;
+            if(role._id.toString()==="68c33d233832715b1f797def"){
+              res.send("se desactiva y se traga el programa")
+            }
+            const roleDelete = await modelRole.findByIdAndUpdate(id,
+                { name },
+                { new: true }
+            );
+            res.send(roleDelete);
+        } catch (error) {
+            res.send(error)
+        }
+
     }
 }
 export default endpointRoles;

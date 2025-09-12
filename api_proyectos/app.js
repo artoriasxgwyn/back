@@ -17,7 +17,7 @@ app.listen(process.env.PORT, () => {
         console.log(`Ay Dios ${process.env.PORT}`);
         mongoose.connect(`mongodb+srv://userExperts:${process.env.CLAVEMONGO}@boss.61jcsip.mongodb.net/?retryWrites=true&w=majority&appName=BOSS`)
             .then(() => {
-                console.log("hola dios me voy  morir")
+                console.log("perdon mami")
             })
     } catch (error) {
         console.log(error)

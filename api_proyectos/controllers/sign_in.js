@@ -4,23 +4,17 @@ import { generarJWT } from "../middlewares/JWT.js"
 
 /*
 {
-    "firstName":"johann",
-    "lastName":"Silva",
-    "email":"johannsilvamendez@gmail.com",
-    "password":"ryomen445",
-    "avatar":"xdxexo",
-    "phone":"3213635730",
-    "global": "68bc9567b90574defd8b5581",
-    "isActive":"true",
-    "isEmailVerified":true,
-    "globalRole":"68bc9567b90574defd8b5581"
+ "firstName":"elian",
+  "password":"ryomen445"
 }
 */
 async function sign_in(req, res) {
     try {
         const { firstName, password } = req.body
         const user = await Users.findOne({ firstName })
-        console.log(user)
+        if (user === null) {
+            res.send("usuario no exite").status(400);
+        }
         const validPassword = bcrypt.compareSync(password, user.password);
         if (!validPassword) {
             res.send("contaseña incorrecta").status(400);
@@ -32,7 +26,8 @@ async function sign_in(req, res) {
     }
     catch (e) {
         console.log(e)
+        res.json(e)
     }
 }
 
-export default sign_in
+export default sign_in;

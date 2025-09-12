@@ -7,7 +7,8 @@ const router = express()
 
 router.get("/", validar, role.getRole);
 router.post("/", validar, onlyAdmin, role.addRole);
-router.put("/", validar, onlyAdmin, role.updateRole);
-router.delete("/", validar, onlyAdmin, role.deleteRole);
+router.put("/:id", validar, onlyAdmin, role.updateRole);
+router.delete("/:id", validar, onlyAdmin, role.deleteRole);
+router.put("/:id/role",validar,onlyAdmin,role.changeRole);
 
 export default router;
