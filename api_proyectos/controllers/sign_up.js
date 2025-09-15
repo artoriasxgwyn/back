@@ -9,7 +9,7 @@ import bcrypt from "bcryptjs"
     "password":"ryomen445",
     "avatar":"xdxexo",
     "phone":"3213635730",
-    "isActive":"true",
+    "isActive":true,
     "isEmailVerified":true,
     "globalRole":"68bc9567b90574defd8b5581"
 }

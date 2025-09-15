@@ -63,11 +63,11 @@ const endpointRoles = {
             if (role._id.toString() === "68c33d233832715b1f797def") {
                 res.send("se desactiva y se traga el programa")
             }
-            const roleDelete = await modelRole.findByIdAndUpdate(id,
+            const roleUpdate = await modelRole.findByIdAndUpdate(id,
                 { name },
                 { new: true }
             );
-            res.send(roleDelete);
+            res.send(roleUpdate);
         } catch (error) {
             res.send(error)
         }

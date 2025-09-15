@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 import users from '../models/users.js';
+import roles from "../models/roles.js"
 
 const generarJWT = (uid) => {
     return new Promise((resolve, reject) => {
@@ -20,26 +21,29 @@ const generarJWT = (uid) => {
 
 
 const validar = async (req, res, next) => {
-    const token = req.header("x-token");
-
-    if (!token) {
-        return res.status(401).json({
-            msg: "No hay token en la peticion"
-        })
-    }
     try {
+        const token = req.header("x-token");
         const uid = jwt.verify(token, process.env.SECRETORPRIVATEKEY)
-        let usuario = await users.findById(uid.uid);
+        let user = await users.findById(uid.uid);
+        let role = await roles.findById(user.globalRole);
         req.uid = uid;
-        console.log(usuario)
-        if(!usuario.isActive){
-        res.status(403).send("No esta activo")
+
+        if (!token) {
+            return res.status(401).json({
+                msg: "No hay token en la peticion"
+            })
         };
-        if (!usuario) {
+        if (!role.isActive) {
+            return res.send("el rol no esta activo");
+        }
+        if (!user.isActive) {
+            return res.status(403).send("No esta activo el usuario")
+        };
+        if (!user) {
             return res.status(401).json({
                 msg: "usuario no existe"
             })
-        }
+        };
         next();
     } catch (error) {
         res.status(401).json({

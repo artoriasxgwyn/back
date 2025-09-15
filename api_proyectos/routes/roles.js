@@ -1,4 +1,4 @@
-import role from "../controllers/role.js";
+import role from "../controllers/roles.js";
 import express from "express";
 import { validar } from "../middlewares/JWT.js";
 import { onlyAdmin } from "../middlewares/securityByRol.js";

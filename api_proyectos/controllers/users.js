@@ -1,4 +1,5 @@
 import modelUser from "../models/users.js"
+import modelRoles from "../models/roles.js"
 
 const functionsUsers = {
     getUsers: async (req, res) => {
@@ -46,6 +47,22 @@ const functionsUsers = {
         } catch (e) {
             res.send(e);
         }
+    },
+    changeRoleUser: async (req, res) => {
+        try {
+            let { id } = req.params;
+            let { name } = req.body;
+            let role = await modelRoles.findOne({ name });
+            let globalRole = role._id;
+            let user = await modelUser.findByIdAndUpdate(id,
+                { globalRole },
+                { new: true }
+            );
+            res.send(user);
+        } catch (error) {
+            res.send(error)
+        }
+
     }
 }
 
