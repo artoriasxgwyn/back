@@ -26,8 +26,9 @@ const functionsUsers = {
         try {
             let { uid } = req.uid
             let { firstName, lastName } = req.body;
+            let updateAt = new Date();
             const user = await modelUser.findByIdAndUpdate(uid,
-                { firstName, lastName },
+                { firstName, lastName, updateAt },
                 { new: true }
             );
             res.send(user);
@@ -39,8 +40,9 @@ const functionsUsers = {
         try {
             let { id } = req.params;
             let isActive = false;
+            let updateAt = new Date();
             const user = await modelUser.findByIdAndUpdate(id,
-                { isActive },
+                { isActive, updateAt },
                 { new: true }
             );
             res.send(user);
@@ -52,10 +54,11 @@ const functionsUsers = {
         try {
             let { id } = req.params;
             let { name } = req.body;
+            let updateAt = new Date();
             let role = await modelRoles.findOne({ name });
             let globalRole = role._id;
             let user = await modelUser.findByIdAndUpdate(id,
-                { globalRole },
+                { globalRole, updateAt },
                 { new: true }
             );
             res.send(user);

@@ -21,8 +21,9 @@ const functionStates = {
     },
     createState: async (req, res) => {
         try {
-            let { name, description, type, isActive } = req.body;
-            const state = new modelStates({ name, description, type, isActive });
+            let { name, description, type } = req.body;
+            let updateAt = new Date();
+            const state = new modelStates({ name, description, type, updateAt });
             await state.save();
             res.send(state);
         } catch (error) {
@@ -32,9 +33,10 @@ const functionStates = {
     updateState: async (req, res) => {
         try {
             let { id } = req.params;
-            let { name, description, type, isActive } = req.body;
+            let { name, description, type } = req.body;
+            let updateAt = new Date();
             const state = await modelStates.findByIdAndUpdate(id,
-                { name, description, type, isActive },
+                { name, description, type, updateAt },
                 { new: true }
             );
             res.send(state);

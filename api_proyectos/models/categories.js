@@ -9,7 +9,7 @@ const modelCategorie = new Schema({
     isActive: Boolean,
     createdBy: ObjectId,
     createdAt: { type: Date, default: Date.now },
-    updateAt: Date
+    updateAt: { type: Date, default: Date.now }
 });
 
-export default mongoose.model("modelCategorie", modelCategorie)
+export default mongoose.model("modelCategorie", modelCategorie);

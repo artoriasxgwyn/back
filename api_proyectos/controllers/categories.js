@@ -25,9 +25,10 @@ const functionCategories = {
     updateCategorie: async (req, res) => {
         try {
             let { id } = req.params;
-            let { name, description, isActive } = req.body;
+            let { name, description } = req.body;
+            let updateAt = new Date();
             const categorie = await modelCategorie.findByIdAndUpdate(id,
-                { name, description, isActive },
+                { name, description, updateAt },
                 { new: true }
             );
             res.send(categorie);
@@ -39,8 +40,9 @@ const functionCategories = {
         try {
             let { id } = req.params;
             let isActive = false;
+            let updateAt = new Date();
             const categorie = await modelCategorie.findByIdAndUpdate(id,
-                { isActive },
+                { isActive, updateAt },
                 { new: true }
             );
             res.send(categorie);
