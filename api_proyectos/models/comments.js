@@ -1,3 +1,4 @@
+// models/comments.js
 import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
@@ -5,11 +6,11 @@ const ObjectId = Schema.ObjectId;
 
 const modelComment = new Schema({
     content: String,
-    author: ObjectId,
-    projectId: ObjectId,
-    editedAt: Date,
+    author: { type: ObjectId, ref: 'modelUser' },
+    projectId: { type: ObjectId, ref: 'modelProjects' }, 
+    editedAt: { type: Date, default: Date.now },
     createdAt: { type: Date, default: Date.now },
-    updateAt: Date
+    updateAt: { type: Date, default: Date.now }
 });
 
 export default mongoose.model("modelComment", modelComment);

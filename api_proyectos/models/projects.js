@@ -11,7 +11,8 @@ const modelProjects = new Schema({
     members: [{
         user: ObjectId,
         role: ObjectId,
-        joinedAt: Date
+        joinedAt: Date,
+        default: []
     }],
     status: ObjectId,
     priority: String,
@@ -20,8 +21,11 @@ const modelProjects = new Schema({
     estimatedHours: Number,
     actualHours: Number,
     budget: Number,
-    isActive: Boolean,
-    tags: [],
+    isActive: { type: Boolean, default: true },
+    tags: {
+        type: [],
+        default: []
+    },
     createdAt: { type: Date, default: Date.now },
     updatedAt: Date
 });
