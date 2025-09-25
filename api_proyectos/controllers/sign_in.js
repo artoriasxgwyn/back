@@ -21,7 +21,7 @@ async function sign_in(req, res) {
         }
         generarJWT(user._id)
             .then((x) => {
-                res.header('x-token', x).send(`si exite el usuario: ${x}`);
+                res.send(`si exite el usuario: ${x}`);
             })
     }
     catch (e) {

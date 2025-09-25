@@ -24,6 +24,7 @@ app.use("/api/comments", comments);
 app.listen(process.env.PORT, () => {
     try {
         console.log(`Ay Dios ${process.env.PORT}`);
+        
         mongoose.connect(`mongodb+srv://userExperts:${process.env.CLAVEMONGO}@boss.61jcsip.mongodb.net/?retryWrites=true&w=majority&appName=BOSS`)
             .then(() => {
                 console.log("perdon mami")
