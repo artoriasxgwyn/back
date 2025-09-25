@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
-const ObjectId = Schema.ObjectId;
+const ObjectId = mongoose.Schema.ObjectId;
 
 const modelCategorie = new Schema({
     name: String,
