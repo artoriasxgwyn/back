@@ -1,4 +1,4 @@
-import sum from "./function.js";
+import sum from "../function.js";
 //npm init jest@latest esto creara un archivo de configuracion para jest con unas cuantas preguntas
 //const sum = require("./function.js")
 
